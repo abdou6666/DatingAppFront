@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-// import {
-//   NgxGalleryAnimation,
-//   NgxGalleryImage,
-//   NgxGalleryOptions,
-// } from '@kolkov/ngx-gallery/public-api';
+import {
+  NgxGalleryAnimation,
+  NgxGalleryImage,
+  NgxGalleryOptions,
+} from '@kolkov/ngx-gallery';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 
@@ -15,8 +15,8 @@ import { MembersService } from 'src/app/_services/members.service';
 })
 export class MemberDetailComponent implements OnInit {
   member: Member | undefined;
-  // galleryOptions: NgxGalleryOptions[] = [];
-  // galleryImages: NgxGalleryImage[] = [];
+  galleryOptions: NgxGalleryOptions[] = [];
+  galleryImages: NgxGalleryImage[] = [];
 
   constructor(
     private memberService: MembersService,
@@ -25,16 +25,16 @@ export class MemberDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadMember();
-    // this.galleryOptions = [
-    //   {
-    //     width: '500px',
-    //     height: '500px',
-    //     imagePercent: 100,
-    //     thumbnailsColumns: 4,
-    //     imageAnimation: NgxGalleryAnimation.Slide,
-    //     preview: false,
-    //   },
-    // ];
+    this.galleryOptions = [
+      {
+        width: '500px',
+        height: '500px',
+        imagePercent: 100,
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        preview: false,
+      },
+    ];
   }
   getImages() {
     if (!this.member) return [];
@@ -56,7 +56,7 @@ export class MemberDetailComponent implements OnInit {
     this.memberService.getMember(username).subscribe({
       next: (member: Member) => {
         this.member = member;
-        // this.galleryImages = this.getImages();
+        this.galleryImages = this.getImages();
       },
     });
   }
